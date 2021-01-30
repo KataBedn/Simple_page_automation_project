@@ -27,6 +27,14 @@ def wait_for_visibility_of_element_xpath(driver_instance, xpath, time_to_wait=10
    return elem
 
 
+def wait_for_visibility_of_element_css(driver_instance, CSS_SELECTOR, time_to_wait=10):
+   try:
+       elem = WebDriverWait(driver_instance, time_to_wait).until(EC.visibility_of_element_located((By.CSS_SELECTOR, CSS_SELECTOR)))
+   except TimeoutException:
+       elem = False
+   return elem
+
+
 def wait_for_invisibility_of_element(inv_driver_instance, id, time_to_wait=8):
    inv_elem = WebDriverWait(inv_driver_instance, time_to_wait).until(EC.invisibility_of_element_located((By.ID, id)))
    return inv_elem
@@ -35,3 +43,7 @@ def wait_for_invisibility_of_element(inv_driver_instance, id, time_to_wait=8):
 def wait_for_invisibility_of_element_by_xpath(inv_driver_instance, xpath, time_to_wait=8):
    inv_elem = WebDriverWait(inv_driver_instance, time_to_wait).until(EC.invisibility_of_element_located((By.XPATH, xpath)))
    return inv_elem
+
+def wait_for_visibility_of_alert(driver_instance, time_to_wait=3):
+   elem = WebDriverWait(driver_instance, time_to_wait).until(EC.alert_is_present())
+   return elem
